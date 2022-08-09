@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 #include "Controller.h"
-#include "Passenger.h"
+#include "Participante.h"
 #include "miBiblioteca.h"
 #include "inputFuntions.h"
 
@@ -12,15 +12,13 @@
 /****************************************************
     Menu:
      1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).
-     3. Alta de pasajero
-     4. Modificar datos de pasajero
-     5. Baja de pasajero
-     6. Listar pasajeros
-     7. Ordenar pasajeros
-     8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).
-     9. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).
-    10. Salir
+     2. Alta de pasajero
+     3. Modificar datos de pasajero
+     4. Baja de pasajero
+     5. Listar pasajeros
+     6. Ordenar pasajeros
+     7. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).
+     8. Salir
 
 *****************************************************/
 int main()
@@ -34,49 +32,42 @@ int main()
     int idMaximo;
 
     idMaximo = GetMaximumID(ID_ARCH);
-    LinkedList* listaPasajeros = ll_newLinkedList();
+    LinkedList* listaParticipantes = ll_newLinkedList();
 
     while(banderaExit == 1){
         mostrarMenu();
-        getNumeroInt(&option, "Ingrese una opcion del menu principal: ", "\nError! Valor ingresado invalido!\n", 1, 10, 0, BUFFER_SIZE);
+        getNumeroInt(&option, "Ingrese una opcion del menu principal: ", "\nError! Valor ingresado invalido!\n", 1, 8, 0, BUFFER_SIZE);
         //fflush(stdin); Si dejo este 'fflush' no deja ingresar a los 'cases'...
         switch(option)
         {
             case 1:
             	if(banderaLoad == 1)
-            		banderaLoad = controller_loadFromText(ARCH,listaPasajeros); // Listo.
+            		banderaLoad = controller_loadFromText(ARCH, listaParticipantes);
                 break;
             case 2:
-            	if(banderaLoad == 1)
-            		banderaLoad = controller_loadFromBinary(ARCH, listaPasajeros); // Listo.
+                //controller_addPassenger(listaPasajeros, &idMaximo); 
                 break;
             case 3:
-                controller_addPassenger(listaPasajeros, &idMaximo); // Listo.
+            	/*if(ll_len(listaPasajeros) >= 1)
+            		controller_editPassenger(listaPasajeros);*/
                 break;
             case 4:
-            	if(ll_len(listaPasajeros) >= 1)
-            		controller_editPassenger(listaPasajeros);// Listo.
+            	/*if(ll_len(listaPasajeros) >= 1)
+            		controller_removePassenger(listaPasajeros); */
                 break;
             case 5:
-            	if(ll_len(listaPasajeros) >= 1)
-            		controller_removePassenger(listaPasajeros); // Listo.
+            	/*if(ll_len(listaPasajeros) >= 1)
+            		controller_ListPassenger(listaPasajeros); */
                 break;
             case 6:
-            	if(ll_len(listaPasajeros) >= 1)
-            		controller_ListPassenger(listaPasajeros); // Listo.
+            	/*if(ll_len(listaPasajeros) >= 1)
+            		controller_sortPassenger(listaPasajeros); */
                 break;
             case 7:
-            	if(ll_len(listaPasajeros) >= 1)
-            		controller_sortPassenger(listaPasajeros); // Listo.
+                banderaSave = controller_saveAsText(ARCH, listaParticipantes);
                 break;
             case 8:
-                banderaSave = controller_saveAsText(ARCH, listaPasajeros); // Listo. El problema era el archivo (.csv) que venia con el proyecto. 06-06-2022
-                break;
-            case 9:
-                banderaSave = controller_saveAsBinary(ARCH, listaPasajeros); // Listo.
-                break;
-            case 10:
-            	banderaExit = controller_exit(listaPasajeros, banderaSave, ARCH, ID_ARCH, &idMaximo);// Listo.
+            	banderaExit = controller_exit(listaParticipantes, banderaSave, ARCH, ID_ARCH, &idMaximo);
             	break;
             default:
                 break;
