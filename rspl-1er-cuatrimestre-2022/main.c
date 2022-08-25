@@ -43,14 +43,14 @@ int main(void){
 	            	Controller_Listar(pLista, bandera);
 	                break;
 	            case 4:
-					Controller_Modificar(pLista, bandera, ll_map, Comic_DescontarPower);/* Habria que probar si funcionaria en un caso real*/
+					Controller_Modificar(pLista, bandera, ll_map, Comic_DescontarPower);/* Habria que probar si funcionaria en un caso real. */
 	                break;
 	            case 5:
 					Controller_Guardar(archNuevo, lista, bandera);
 	                break;
 	            default:
 	                system("pause");
-	                system("cls");// No reconoce la funcion, porque no lo "admite" la consola de GDB
+	                system("cls");// No reconoce la funcion en el GDB, porque no lo "admite" la consola.
 	            	break;
 	        }
 	    }while(opcionMenu != 6);
