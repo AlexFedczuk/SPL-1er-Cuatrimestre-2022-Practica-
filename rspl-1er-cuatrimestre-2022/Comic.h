@@ -4,7 +4,6 @@
  *  Created on: Aug 11, 2022
  *      Author: Alex Yago Fedczuk
  */
-
 #ifndef COMIC_H_
 #define COMIC_H_
 
